@@ -208,4 +208,7 @@ $RECYCLE.BIN/
 # and uncomment the following lines
 # .pnp.*
 
+# Firebase
+recardbus-afbc6-firebase-adminsdk-zmcps-5877e98a3f.json
+
 # End of https://www.toptal.com/developers/gitignore/api/yarn,node,linux,windows,visualstudiocode
