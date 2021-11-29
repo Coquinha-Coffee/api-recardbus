@@ -1,5 +1,5 @@
-import { TariffEntity } from "../../domain/entities/TariffEntity"
-import { TariffRepository } from "../../domain/repositories/TariffRepository"
+import { TariffEntity } from '../../domain/entities/TariffEntity'
+import { TariffRepository } from '../../domain/repositories/TariffRepository'
 
 export class SaveTariffCommand {
     private tariffRepository: TariffRepository
@@ -8,7 +8,7 @@ export class SaveTariffCommand {
         this.tariffRepository = tariffRepository
     }
 
-    public async execute(tariff: TariffEntity): Promise<{ id: string}> {
-        return this.tariffRepository.save(tariff)
+    public async execute(tariffs: TariffEntity[]): Promise<{ sucess: boolean }> {
+        return await this.tariffRepository.save(tariffs)
     }
 }
