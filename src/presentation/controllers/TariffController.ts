@@ -1,6 +1,5 @@
 import { Request, Response } from 'express'
 
-import { TariffRepository } from '../../domain/repositories/TariffRepository'
 import { SaveTariffCommand } from '../../application/command/SaveTariffCommand'
 import { FirestoreTariffRepository } from '../../infrastructure/persistence/firestore/repositories/FirestoreTariffRespository'
 import { TariffEntity } from '../../domain/entities/TariffEntity'
