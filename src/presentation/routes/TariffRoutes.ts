@@ -6,6 +6,6 @@ const tariffController = new TariffController()
 
 tariffRoutes.post('/tariffs', tariffController.create)
 
-tariffRoutes.get('/tariffs/:typecard', tariffController.index)
+tariffRoutes.get('/tariffs/:typeCard', tariffController.index)
 
 export { tariffRoutes }

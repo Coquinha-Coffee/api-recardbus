@@ -1,12 +1,22 @@
 import { Request, Response } from 'express'
 
 import { SaveTariffCommand } from '../../application/command/SaveTariffCommand'
+import { GetPerTypeCardTariffQuery } from '../../application/query/GetPerTypeCardTariffQuery'
 import { FirestoreTariffRepository } from '../../infrastructure/persistence/firestore/repositories/FirestoreTariffRespository'
 import { TariffEntity } from '../../domain/entities/TariffEntity'
 
 export class TariffController {
     public async index(request: Request, response: Response) {
-        return response.json({ message: 'GET Tariff' })
+        const { typeCard } = request.params as { typeCard: string }
+
+        const firestoreTariffRepository = new FirestoreTariffRepository()
+        const getTariffAllPerTypeCard = new GetPerTypeCardTariffQuery(
+            firestoreTariffRepository
+        )
+
+        const tariffs = await getTariffAllPerTypeCard.execute(typeCard)
+
+        return response.json({ tariffs })
     }
 
     public async create(request: Request, response: Response) {
