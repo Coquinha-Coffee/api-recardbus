@@ -1,5 +1,5 @@
-import { UserEntity } from "../../domain/entities/UserEntity"
-import { UserRepository } from "../../domain/repositories/UserRepository"
+import { UserEntity } from '../../domain/entities/UserEntity'
+import { UserRepository } from '../../domain/repositories/UserRepository'
 
 export class GetUserQuery {
     private userRepository: UserRepository

@@ -1,5 +1,5 @@
-import { UserEntity } from "../../domain/entities/UserEntity"
-import { UserRepository } from "../../domain/repositories/UserRepository"
+import { UserEntity } from '../../domain/entities/UserEntity'
+import { UserRepository } from '../../domain/repositories/UserRepository'
 
 export class SaveUserCommand {
     private userRepository: UserRepository
@@ -8,7 +8,7 @@ export class SaveUserCommand {
         this.userRepository = userRepository
     }
 
-    public async execute(user: UserEntity): Promise<{ id: string}> {
-        return this.userRepository.save(user)
+    public async execute(email: string, password: string): Promise<UserEntity> {
+        return await this.userRepository.save(email, password)
     }
 }
