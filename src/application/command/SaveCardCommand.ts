@@ -10,7 +10,7 @@ export class SaveCardCommand {
 
     public async execute(
         card: CardEntity
-    ): Promise<{ status: string; data: CardEntity }> {
+    ): Promise<{ status: string; data: CardEntity | {} }> {
         return this.cardRepository.save(card)
     }
 }

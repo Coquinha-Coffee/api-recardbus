@@ -10,7 +10,7 @@ export class GetCardsPerUserQuery {
 
     public async execute(
         idUser: string
-    ): Promise<{ status: string; data: CardEntity[] }> {
+    ): Promise<{ status: string; data: CardEntity[] | [] }> {
         return await this.cardRepository.allPerUser(idUser)
     }
 }
