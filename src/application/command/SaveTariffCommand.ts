@@ -8,7 +8,9 @@ export class SaveTariffCommand {
         this.tariffRepository = tariffRepository
     }
 
-    public async execute(tariffs: TariffEntity[]): Promise<{ sucess: boolean }> {
+    public async execute(
+        tariffs: TariffEntity[]
+    ): Promise<{ status: string; data: TariffEntity[] }> {
         return await this.tariffRepository.save(tariffs)
     }
 }

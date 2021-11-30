@@ -14,9 +14,9 @@ export class TariffController {
             firestoreTariffRepository
         )
 
-        const tariffs = await getTariffAllPerTypeCard.execute(typeCard)
+        const responseDatabase = await getTariffAllPerTypeCard.execute(typeCard)
 
-        return response.json({ tariffs })
+        return response.json(responseDatabase)
     }
 
     public async create(request: Request, response: Response) {
@@ -28,10 +28,10 @@ export class TariffController {
             firestoreTariffRepository
         )
 
-        const { sucess } = await commandSaveTariffCommand.execute(tariffs)
+        const responseDatabase = await commandSaveTariffCommand.execute(tariffs)
 
-        if (!sucess) statusCode = 400
+        if (responseDatabase.status === 'error') statusCode = 400
 
-        return response.status(statusCode).json({ sucess })
+        return response.status(statusCode).json(responseDatabase)
     }
 }
