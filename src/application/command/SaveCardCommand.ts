@@ -1,5 +1,5 @@
-import { CardEntity } from "../../domain/entities/CardEntity"
-import { CardRepository } from "../../domain/repositories/CardRepository"
+import { CardEntity } from '../../domain/entities/CardEntity'
+import { CardRepository } from '../../domain/repositories/CardRepository'
 
 export class SaveCardCommand {
     private cardRepository: CardRepository
@@ -8,7 +8,9 @@ export class SaveCardCommand {
         this.cardRepository = cardRepository
     }
 
-    public async execute(card: CardEntity): Promise<{ id: string}> {
+    public async execute(
+        card: CardEntity
+    ): Promise<{ status: string; data: CardEntity }> {
         return this.cardRepository.save(card)
     }
 }
