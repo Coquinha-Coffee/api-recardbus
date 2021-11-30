@@ -1,11 +1,27 @@
 import { Request, Response } from 'express'
 import { SaveCardCommand } from '../../application/command/SaveCardCommand'
+import { GetCardsPerUserQuery } from '../../application/query/GetCardsPerUserQuery'
 import { CardEntity } from '../../domain/entities/CardEntity'
 import { FirestoreCardRepository } from '../../infrastructure/persistence/firestore/repositories/FirestoreCardRespository'
 
 export class CardController {
     public async index(request: Request, response: Response) {
-        return response.json({ message: 'GET cards' })
+        const { idUser } = request.params as { idUser: string }
+        let statusCode = 302
+        let responseDatabase: { status?: string, data?: CardEntity | {}} = {}
+
+        try {
+            const firestore = new FirestoreCardRepository()
+            const query = new GetCardsPerUserQuery(firestore)
+
+            responseDatabase = await query.execute(idUser)
+
+            if (responseDatabase.status === 'error') statusCode = 404
+        } catch {
+            statusCode = 404
+        }
+
+        return response.json(responseDatabase)
     }
 
     public async create(request: Request, response: Response) {

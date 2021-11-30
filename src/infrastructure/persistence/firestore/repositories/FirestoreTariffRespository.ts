@@ -21,7 +21,7 @@ export class FirestoreTariffRepository implements TariffRepository {
                 tariffA.amount > tariffB.amount ? 1 : -1
             )
         } catch {
-            console.error('ERROR: Na busca por tarifas de acordo com o tipo do cartão')
+            console.error('ERRO: Na busca por tarifas de acordo com o tipo do cartão')
             status = 'error'
             tariffs = []
         }
