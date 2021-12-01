@@ -1,7 +1,7 @@
 export class RechargeEntity {
-    id: string
+    id?: string
     date: Date
     amountTicket: number
-    ticketValue: number
+    priceTotal: number
     idCard: string
 }
