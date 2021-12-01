@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 import { SaveRechargeCommand } from '../../application/command/SaveRechargeCommand'
+import { GetRechargesPerCardQuery } from '../../application/query/GetRechargesPerCardQuery'
 import { RechargeEntity } from '../../domain/entities/RechargeEntity'
 import { FirestoreRechargeRepository } from '../../infrastructure/persistence/firestore/repositories/FirestoreRechargeRepository'
 
@@ -11,7 +12,30 @@ interface IRecharge {
 
 export class RechargeController {
     public async index(request: Request, response: Response) {
-        return response.json({ message: 'GET recharges' })
+        const { idCard } = request.params as { idCard: string }
+        let statusCode = 302
+        let responseDatabase: {
+            status?: string
+            data?: RechargeEntity[] | []
+        } = {}
+
+        console.log('index')
+
+        try {
+            const firestore = new FirestoreRechargeRepository()
+            const query = new GetRechargesPerCardQuery(firestore)
+
+            responseDatabase = await query.execute(idCard)
+
+            if (responseDatabase.status === 'error') statusCode = 404
+
+            console.log(responseDatabase)
+        } catch {
+            console.error('Catch')
+            statusCode = 404
+        }
+
+        return response.status(statusCode).json(responseDatabase)
     }
 
     public async create(request: Request, response: Response) {
@@ -32,6 +56,6 @@ export class RechargeController {
             statusCode = 400
         }
 
-        return response.json(responseDatabase)
+        return response.status(statusCode).json(responseDatabase)
     }
 }

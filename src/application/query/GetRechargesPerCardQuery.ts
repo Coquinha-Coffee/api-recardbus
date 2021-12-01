@@ -1,5 +1,5 @@
-import { RechargeEntity } from "../../domain/entities/RechargeEntity";
-import { RechargeRepository } from "../../domain/repositories/RechargeRepository";
+import { RechargeEntity } from '../../domain/entities/RechargeEntity'
+import { RechargeRepository } from '../../domain/repositories/RechargeRepository'
 
 export class GetRechargesPerCardQuery {
     private rechargeRespository: RechargeRepository
@@ -8,7 +8,9 @@ export class GetRechargesPerCardQuery {
         this.rechargeRespository = rechargeRepository
     }
 
-    public async execute(idCard: string): Promise<RechargeEntity[]> {
+    public async execute(
+        idCard: string
+    ): Promise<{ status: string; data: RechargeEntity[] | [] }> {
         return await this.rechargeRespository.allPerCard(idCard)
     }
 }

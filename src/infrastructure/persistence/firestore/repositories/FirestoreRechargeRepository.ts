@@ -9,7 +9,26 @@ export class FirestoreRechargeRepository implements RechargeRepository {
     private readonly collectionCards = db.collection('cards-test')
 
     public async allPerCard(idCard: string) {
-        return { status: '', data: [] }
+        let recharges: RechargeEntity[] = []
+        let status = 'success'
+
+        try {
+            const rechargesDoc = await this.collectionRecharges
+                .where('idCard', '==', idCard)
+                .get()
+
+            recharges = rechargesDoc.docs.map(
+                (doc) => doc.data() as RechargeEntity
+            )
+
+            console.log(recharges)
+        } catch {
+            console.error(`ERRO: Ao buscar recargas do cartao com id ${idCard}`)
+            status = 'error'
+            recharges = []
+        }
+
+        return { status, data: recharges }
     }
 
     public async save(recharge: RechargeEntity) {
