@@ -3,5 +3,6 @@ export class RechargeEntity {
     date: Date
     amountTicket: number
     priceTotal: number
+    payment: string
     idCard: string
 }
