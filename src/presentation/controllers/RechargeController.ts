@@ -8,18 +8,17 @@ interface IRecharge {
     idCard: string
     amountTicket: number
     priceTotal: number
+    payment: string
 }
 
 export class RechargeController {
     public async index(request: Request, response: Response) {
         const { idCard } = request.params as { idCard: string }
-        let statusCode = 302
+        let statusCode = 200
         let responseDatabase: {
             status?: string
             data?: RechargeEntity[] | []
         } = {}
-
-        console.log('index')
 
         try {
             const firestore = new FirestoreRechargeRepository()
@@ -27,7 +26,10 @@ export class RechargeController {
 
             responseDatabase = await query.execute(idCard)
 
-            if (responseDatabase.status === 'error') statusCode = 404
+            if (responseDatabase.status === 'error') {
+                console.error('Deu merda')
+                statusCode = 404
+            }
 
             console.log(responseDatabase)
         } catch {

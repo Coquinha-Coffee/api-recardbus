@@ -7,7 +7,7 @@ import { FirestoreCardRepository } from '../../infrastructure/persistence/firest
 export class CardController {
     public async index(request: Request, response: Response) {
         const { idUser } = request.params as { idUser: string }
-        let statusCode = 302
+        let statusCode = 200
         let responseDatabase: { status?: string, data?: CardEntity | {}} = {}
 
         try {

@@ -12,15 +12,15 @@
 | tariffs/ | Criar tarifa | POST | type amount value |
 | tariffs/:typeCard | Retorna as tarifas de acordo com o tipo do cartão | GET |  |
 | recharges/:idCard | Retorna o histórico de recargas de acordo com o id do cartão do usuário | GET |  |
-| recharges/  | Salva uma recarga | POST | idCard amountTicket priceTotal |
+| recharges/  | Salva uma recarga | POST | idCard amountTicket priceTotal payment |
 
 ---
 
 ### Default response
 
-```json
+```tsx
 {
-	"status": "sucess" || "error",
-	"data": [] || {}
+	status: "sucess" || "error",
+	data: [] || {}
 }
 ```

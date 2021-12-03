@@ -21,7 +21,7 @@ export class FirestoreRechargeRepository implements RechargeRepository {
                 (doc) => doc.data() as RechargeEntity
             )
 
-            console.log(recharges)
+            // console.log(recharges)
         } catch {
             console.error(`ERRO: Ao buscar recargas do cartao com id ${idCard}`)
             status = 'error'
